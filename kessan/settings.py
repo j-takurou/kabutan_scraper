@@ -56,10 +56,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
-#    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
-
+# XXX: なぜかcorestatsのspider_opened methodのself.start_time がNoneのまま、利用されてしまうバグが発生している
+EXTENSIONS = {
+    'scrapy.extensions.corestats.CoreStats': None,
+}
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {

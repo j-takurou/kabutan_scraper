@@ -7,6 +7,7 @@
 # useful for handling different item types with a single interface
 import pdb
 import pandas as pd
+from datetime import datetime
 from itemadapter import ItemAdapter
 # import pdb;pdb.set_trace()
 import sqlite3
@@ -76,9 +77,6 @@ class KessanPipeline:
                 values_string = "".join([f"({code}, {name}, '-1')," for code, name in tickers])
                 query = "INSERT INTO ticker_brand (code, name, mcap) values" + values_string
                 self.cur.execute(query)
-
-
-
 
 
     def close_spider(self, spider):
