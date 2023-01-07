@@ -21,6 +21,43 @@ def get_brands():
 
 
 class KessanPipeline:
+    def open_spider(self, spider):
+
+        self.connection = sqlite3.connect('shows.db')
+        self.cur = self.connection.cursor()
+        try:
+            query = '''
+                CREATE TABLE kessan (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    code TEXT,
+                    article_type TEXT,
+                    period TEXT,
+                    sale REAL,
+                    op_profit REAL,
+                    keijo_profit REAL,
+                    final_profit REAL,
+                    release_date TEXT,
+                    dividend REAL
+                    )
+                '''
+            self.cur.execute(query)
+        except Exception as e:
+            if "already exists" not in str(e):
+                raise e
+
+    def close_spider(self, spider):
+        self.cur.close()
+        self.connection.close()
+    def process_item(self, item, spider):
+        # pdb.set_trace()
+        query=f"""
+            INSERT INTO kessan(article_type, code, dividend ,sale, op_profit, keijo_profit, final_profit, period, release_date) values(
+            '{item['article_type']}', '{item['code']}', {item['dividend']}, {item['sale']}, {item['op_profit']}, {item['keijo_profit']}, {item['final_profit']}, '{item['period']}', '{item['release_date']}');"""
+        self.cur.execute(query)
+        self.connection.commit()
+        return item
+
+class PricePipeline:
 
     def open_spider(self, spider):
         if USE_PSQL:
@@ -101,7 +138,6 @@ class KessanPipeline:
         
         self.cur.execute(query)
         self.cur.execute(query_for_brand)
-
         self.connection.commit()
         return item
 

@@ -1,5 +1,12 @@
+# 決算情報・株価データを収集するScraper system
 
+## Data Source 
+- kabutan
 
-
-1. filesystemの在り方変更
-2. output dirのlog rotation実施
+## How to Use 
+1. github secretsにS3利用するためのaccess keysの情報を下記の変数名で追加する
+    - ```
+    ACCESS_KEY_ID=xxxxxxx
+    SECRET_ACCESS_KEY=yyyyyyyy
+    ```
+2. github actionでバッチ実行する

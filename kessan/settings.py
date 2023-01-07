@@ -63,7 +63,7 @@ EXTENSIONS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'kessan.pipelines.KessanPipeline': 300,
+   'kessan.pipelines.PricePipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

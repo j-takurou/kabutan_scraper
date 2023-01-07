@@ -36,7 +36,17 @@ mcap float,
 )
 """
 
-class 
+class KessanItem(scrapy.Item):
+    code = scrapy.Field()
+    article_type = scrapy.Field()
+    period = scrapy.Field()
+    sale = scrapy.Field()
+    op_profit = scrapy.Field()
+    keijo_profit = scrapy.Field()
+    final_profit = scrapy.Field()
+    release_date = scrapy.Field()
+    dividend = scrapy.Field()
+
 
 class PriceItem(scrapy.Item):
     # define the fields for your item here like:

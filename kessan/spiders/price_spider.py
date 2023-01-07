@@ -1,7 +1,7 @@
 import pdb
 import scrapy
 
-from kessan.items import KessanItem
+from kessan.items import KessanItem, PriceItem
 from collections import defaultdict
 import time
 import requests
@@ -91,7 +91,7 @@ class StockSpider(scrapy.Spider):
                     # '前日比', '前日比％'を "_"に
                     open, high, low, close, _, _, volume = td_elems
                 
-                yield KessanItem(
+                yield PriceItem(
                     code=params_dict["code"],
                     date=date,
                     open=open,
