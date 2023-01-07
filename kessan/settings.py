@@ -1,4 +1,4 @@
-# Scrapy settings for stock_crawler project
+# Scrapy settings for kessan project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'stock_crawler'
+BOT_NAME = 'kessan'
 
-SPIDER_MODULES = ['stock_crawler.spiders']
-NEWSPIDER_MODULE = 'stock_crawler.spiders'
+SPIDER_MODULES = ['kessan.spiders']
+NEWSPIDER_MODULE = 'kessan.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'stock_crawler (+http://www.yourdomain.com)'
+#USER_AGENT = 'kessan (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,26 +45,26 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'stock_crawler.middlewares.StockCrawlerSpiderMiddleware': 543,
+#    'kessan.middlewares.KessanSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'stock_crawler.middlewares.StockCrawlerDownloaderMiddleware': 543,
+#    'kessan.middlewares.KessanDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
-#    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
-
+# XXX: なぜかcorestatsのspider_opened methodのself.start_time がNoneのまま、利用されてしまうバグが発生している
+EXTENSIONS = {
+    'scrapy.extensions.corestats.CoreStats': None,
+}
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'stock_crawler.pipelines.StockCrawlerPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'kessan.pipelines.PricePipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
