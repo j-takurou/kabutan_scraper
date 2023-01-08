@@ -37,6 +37,6 @@ jobs:
         pytest
     - name: Execute the price batch
       run: |
-        # execute
         scrapy crawl price
+        python rotation_s3.py
 

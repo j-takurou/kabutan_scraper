@@ -34,3 +34,6 @@ def rotate_data():
 
 # sqlite3のファイルをマージする方法
 # https://stackoverflow.com/questions/80801/how-can-i-merge-many-sqlite-databases
+
+if __name__ == "__main__":
+    rotate_data()

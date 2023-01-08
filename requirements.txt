@@ -46,3 +46,4 @@ urllib3==1.26.11
 w3lib==2.0.1
 xlrd==2.0.1
 zope.interface==5.4.0
+boto3

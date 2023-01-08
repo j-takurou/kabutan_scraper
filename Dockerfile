@@ -16,7 +16,6 @@ ENV TZ=Asia/Tokyo
 # 必要に応じて、JupyterLabの拡張機能などを追加してください
 RUN python3 -m pip install --upgrade pip \
 &&  pip install --no-cache-dir \
-        django \
         pandas \
         requests \
         psycopg2 \
