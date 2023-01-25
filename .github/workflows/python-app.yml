@@ -36,6 +36,9 @@ jobs:
       run: |
         pytest
     - name: Execute the price batch
+      env: 
+        ACCESS_KEY_ID: ${{ secrets.AccessKey }}
+        SECRET_ACCESS_KEY: ${{ secrets.SecretAccessKey }}
       run: |
         scrapy crawl price
         python rotation_s3.py
