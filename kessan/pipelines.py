@@ -61,13 +61,7 @@ class PricePipeline:
 
     def open_spider(self, spider):
         if USE_PSQL:
-            import psycopg2
-            hostname = 'postgres'
-            username = 'takubo'
-            password = "password" # your password
-            database = 'stock_database'
-            self.connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
-            self.cur = self.connection.cursor()
+            raise NotImplementedError
         else:
             self.connection = sqlite3.connect('shows.db')
             self.cur = self.connection.cursor()
