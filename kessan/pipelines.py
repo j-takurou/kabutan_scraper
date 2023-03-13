@@ -61,6 +61,7 @@ class PricePipeline:
 
     def open_spider(self, spider):
         if USE_PSQL:
+            import psycopg2
             hostname = 'postgres'
             username = 'takubo'
             password = "password" # your password
