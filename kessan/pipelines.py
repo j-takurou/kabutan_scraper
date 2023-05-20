@@ -15,9 +15,12 @@ import sqlite3
 USE_PSQL = False
 
 def get_brands():
-    brands_sheet_url = f"https://www.jpx.co.jp/markets/statistics-equities/misc/tvdivq0000001vg2-att/data_j.xls"
+    # brands_sheet_url = f"https://www.jpx.co.jp/markets/statistics-equities/misc/tvdivq0000001vg2-att/data_j.xls"
     # ["日付", "コード", "銘柄名", "市場・商品区分", "33業種コード", "33業種区分", "17業種コード", "17業種区分", "規模コード", "規模区分"]
-    return pd.read_excel(brands_sheet_url)
+    # pd.read_excel(brands_sheet_url)
+    with open("code_list.txt", "r") as f:
+        codes = f.readlines()
+    return codes
 
 
 class KessanPipeline:
@@ -61,7 +64,13 @@ class PricePipeline:
 
     def open_spider(self, spider):
         if USE_PSQL:
-            raise NotImplementedError
+            import psycopg2
+            hostname = 'postgres'
+            username = 'takubo'
+            password = "password" # your password
+            database = 'stock_database'
+            self.connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database)
+            self.cur = self.connection.cursor()
         else:
             self.connection = sqlite3.connect('shows.db')
             self.cur = self.connection.cursor()
@@ -104,7 +113,7 @@ class PricePipeline:
                 """
                 self.cur.execute(query)
                 # and insert data
-                tickers = get_brands()["コード"].unique()
+                tickers = get_brands()
                 # pdb.set_trace()
                 values_string = "".join([f"({code}, {name}, '-1')," for code, name in tickers])
                 query = "INSERT INTO ticker_brand (code, name, mcap) values" + values_string
