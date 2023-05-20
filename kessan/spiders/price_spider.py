@@ -6,7 +6,6 @@ from collections import defaultdict
 import time
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 import numpy as np
 # from typing import Boolean
 import re
@@ -14,9 +13,12 @@ import datetime as dt
 from kessan.logger import logger
 
 def get_brands():
-    brands_sheet_url = f"https://www.jpx.co.jp/markets/statistics-equities/misc/tvdivq0000001vg2-att/data_j.xls"
+    # brands_sheet_url = f"https://www.jpx.co.jp/markets/statistics-equities/misc/tvdivq0000001vg2-att/data_j.xls"
     # ["日付", "コード", "銘柄名", "市場・商品区分", "33業種コード", "33業種区分", "17業種コード", "17業種区分", "規模コード", "規模区分"]
-    return pd.read_excel(brands_sheet_url)
+    # pd.read_excel(brands_sheet_url)
+    with open("code_list.txt", "r") as f:
+        codes = f.readlines()
+    return codes
 
 def clean_numbers(num_str: str, is_int = True):
     if "." in num_str:
