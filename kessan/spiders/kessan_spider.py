@@ -2,7 +2,6 @@ import pdb
 import scrapy
 import re
 import html
-import pandas as pd
 import datetime as dt
 from pathlib import Path
 from kessan.items import KessanItem, PriceItem
