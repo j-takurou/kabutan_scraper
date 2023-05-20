@@ -4,6 +4,9 @@
 name: Python application
 
 on:
+  push:
+    branches:
+      - new-main
   schedule:
     - cron: "0 0 1 * *" # 分 時 日 月 曜日
 
