@@ -5,7 +5,8 @@ import boto3
 import datetime as dt
 _today = dt.date.today().strftime("%Y-%m-%d")
 
-def store_listdata_to_s3(data:list, bucket_name):
+
+def store_listdata_to_s3(data : list, bucket_name):
 
     ACCESS_KEY_ID = os.environ["ACCESS_KEY_ID"]
     SECRET_ACCESS_KEY = os.environ["SECRET_ACCESS_KEY"]
@@ -22,9 +23,11 @@ def store_listdata_to_s3(data:list, bucket_name):
 
 def rotate_data():
     """ 月初めになったら先月分データを一式s3に送信する """
+
+    today_str = _today.replace("-", "/")
     conn = sqlite3.connect('shows.db')
     _cursor = conn.cursor()
-    query = "SELECT * FROM ticker_price"
+    query = "SELECT * FROM ticker_price" + f"WHERE date < '{today_str}'"
     res = _cursor.execute(query)
     data = res.fetchall()
     store_listdata_to_s3(data, bucket_name=_today)

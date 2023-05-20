@@ -9,4 +9,5 @@
     ACCESS_KEY_ID=xxxxxxx
     SECRET_ACCESS_KEY=yyyyyyyy
     ```
+2'. `scrapy crawl price`をdockercompose経由で実行
 2. github actionでバッチ実行する
